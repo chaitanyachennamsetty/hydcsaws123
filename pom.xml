@@ -13,7 +13,7 @@
     <groupId>techshopy</groupId> <!-- REQUIRED -->
     <artifactId>devopsproject</artifactId> <!-- REQUIRED -->
     <version>1.0.0</version> <!-- REQUIRED -->
-    <name>Spring Boot Application</name>
+    <name>devops project</name>
     
     <properties>
         <java.version>17</java.version>
