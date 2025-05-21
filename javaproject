@@ -1,4 +1,4 @@
-// src/main/java/com/example/demo/DemoApplication.java
+// src/main/java/com/example/devopsproject/DemoApplication.java
 package com.example.devopsproject;
 
 import org.springframework.boot.SpringApplication;
@@ -17,6 +17,6 @@ public class DemoApplication {
 class HelloController {
     @GetMapping("/")
     public String hello() {
-        return "Hello, Deployment!";
+        return "Hello from devops project!"; 
     }
 }
