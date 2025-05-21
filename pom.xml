@@ -1,18 +1,31 @@
-<project>
-    <!-- ... other configurations ... -->
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion> <!-- REQUIRED -->
+    
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.0</version> <!-- Use latest stable version -->
+        <version>3.2.0</version>
     </parent>
-
+    
+    <groupId>com.yourcompany</groupId> <!-- REQUIRED -->
+    <artifactId>your-project-name</artifactId> <!-- REQUIRED -->
+    <version>1.0.0</version> <!-- REQUIRED -->
+    <name>Spring Boot Application</name>
+    
+    <properties>
+        <java.version>17</java.version>
+    </properties>
+    
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
     </dependencies>
-
+    
     <build>
         <plugins>
             <plugin>
