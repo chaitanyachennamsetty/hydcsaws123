@@ -11,7 +11,7 @@
     </parent>
     
     <groupId>techshopy</groupId> <!-- REQUIRED -->
-    <artifactId>devops project</artifactId> <!-- REQUIRED -->
+    <artifactId>devopsproject</artifactId> <!-- REQUIRED -->
     <version>1.0.0</version> <!-- REQUIRED -->
     <name>Spring Boot Application</name>
     
