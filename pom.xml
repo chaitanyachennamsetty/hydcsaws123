@@ -10,8 +10,8 @@
         <version>3.2.0</version>
     </parent>
     
-    <groupId>com.yourcompany</groupId> <!-- REQUIRED -->
-    <artifactId>your-project-name</artifactId> <!-- REQUIRED -->
+    <groupId>techshopy</groupId> <!-- REQUIRED -->
+    <artifactId>devops project</artifactId> <!-- REQUIRED -->
     <version>1.0.0</version> <!-- REQUIRED -->
     <name>Spring Boot Application</name>
     
