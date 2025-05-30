@@ -1,0 +1,5 @@
+/root/hydcsaws123/spring-boot-inventory/src/main/java/com/example/inventory/model/Product.java
+/root/hydcsaws123/spring-boot-inventory/src/main/java/com/example/inventory/InventoryApplication.java
+/root/hydcsaws123/spring-boot-inventory/src/main/java/com/example/inventory/controller/ProductController.java
+/root/hydcsaws123/spring-boot-inventory/src/main/java/com/example/inventory/service/ProductService.java
+/root/hydcsaws123/spring-boot-inventory/src/main/java/com/example/inventory/repository/ProductRepository.java
