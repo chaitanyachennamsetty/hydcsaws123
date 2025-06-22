@@ -77,6 +77,13 @@ terraform apply
 kubectl apply -f k8s/deployment.yaml
 kubectl apply -f k8s/service.yaml
 ```
+---
+
+## 🖼️ Project Screenshot
+
+Here is a preview of the login page:
+
+![Login Page Screenshot](login-page-screenshot.png)
 
 ---
 
