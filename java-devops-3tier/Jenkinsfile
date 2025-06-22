@@ -1,0 +1,29 @@
+pipeline {
+  agent any
+  stages {
+    stage('Clone') {
+      steps {
+        git 'https://github.com/chaitanyachennamsetty/hydcsaws123.git'
+      }
+    }
+    stage('Build') {
+      steps {
+        dir('java-devops-3tier/Java-Login-App') {
+          sh 'mvn clean package'
+        }
+      }
+    }
+    stage('Docker Build') {
+      steps {
+        dir('java-devops-3tier/Java-Login-App') {
+          sh 'docker build -t java-login-app .'
+        }
+      }
+    }
+    stage('Docker Run') {
+      steps {
+        sh 'docker run -d -p 8080:8080 java-login-app'
+      }
+    }
+  }
+}
