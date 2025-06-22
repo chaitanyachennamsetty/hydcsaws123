@@ -1,0 +1,8 @@
+*.pem
+*.tfstate
+*.tfstate.backup
+target/
+*.log
+.env
+.idea/
+.vscode/
