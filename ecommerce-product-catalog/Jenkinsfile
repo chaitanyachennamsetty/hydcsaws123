@@ -1,0 +1,32 @@
+pipeline {
+  agent any
+  environment {
+    DOCKERHUB_USER = credentials('dockerhub-username')
+    DOCKERHUB_PASS = credentials('dockerhub-password')
+    IMAGE = "${DOCKERHUB_USER}/product-catalog"
+    KUBE_CONFIG = credentials('kubeconfig')
+  }
+  stages {
+    stage('Checkout') { steps { checkout scm } }
+    stage('Build') { steps { sh 'mvn -f app/pom.xml -DskipTests clean package' } }
+    stage('Docker Build & Push') {
+      steps {
+        sh 'docker build -t $IMAGE:$BUILD_NUMBER .'
+        sh 'echo $DOCKERHUB_PASS | docker login -u $DOCKERHUB_USER --password-stdin'
+        sh 'docker push $IMAGE:$BUILD_NUMBER'
+        sh 'docker tag $IMAGE:$BUILD_NUMBER $IMAGE:latest'
+        sh 'docker push $IMAGE:latest'
+      }
+    }
+    stage('Deploy to Kubernetes') {
+      steps {
+        withCredentials([file(variable: 'KUBECONFIG_FILE', credentialsId: 'kubeconfig')]) {
+          sh '''
+            export KUBECONFIG=$KUBECONFIG_FILE
+            kubectl apply -f k8s/
+          '''
+        }
+      }
+    }
+  }
+}
