@@ -2,6 +2,7 @@ package com.example.catalog.controller;
 
 import com.example.catalog.model.Product;
 import com.example.catalog.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,42 +11,52 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {
-    private final ProductRepository repo;
 
-    public ProductController(ProductRepository repo) {
-        this.repo = repo;
-    }
+    @Autowired
+    private ProductRepository productRepository;
 
+    // Get all products
     @GetMapping
-    public List<Product> all() { return repo.findAll(); }
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
+    }
 
-    @PostMapping
-    public Product create(@RequestBody Product p) { return repo.save(p); }
-
+    // Get product by ID
     @GetMapping("/{id}")
-    public ResponseEntity<Product> one(@PathVariable Long id) {
-        return repo.findById(id)
-                   .map(ResponseEntity::ok)
-                   .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<Product> getProductById(@PathVariable Long id) {
+        return productRepository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
+    // Create new product
+    @PostMapping
+    public Product createProduct(@RequestBody Product product) {
+        return productRepository.save(product);
+    }
+
+    // Update product
     @PutMapping("/{id}")
-    public ResponseEntity<Product> update(@PathVariable Long id, @RequestBody Product update) {
-        return repo.findById(id).map(p -> {
-            p.setName(update.getName());
-            p.setDescription(update.getDescription());
-            p.setPrice(update.getPrice());
-            p.setSku(update.getSku());
-            p.setStock(update.getStock());
-            return ResponseEntity.ok(repo.save(p));
-        }).orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product productDetails) {
+        return productRepository.findById(id)
+                .map(product -> {
+                    product.setName(productDetails.getName());
+                    product.setDescription(productDetails.getDescription());
+                    product.setPrice(productDetails.getPrice());
+                    return ResponseEntity.ok(productRepository.save(product));
+                })
+                .orElse(ResponseEntity.notFound().build());
     }
 
+    // Delete product
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        return repo.findById(id).map(p -> { 
-            repo.delete(p); 
-            return ResponseEntity.noContent().build(); 
-        }).orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<?> deleteProduct(@PathVariable Long id) {
+        return productRepository.findById(id)
+                .map(product -> {
+                    productRepository.deleteById(id);
+                    return ResponseEntity.ok().build();
+                })
+                .orElse(ResponseEntity.notFound().build());
     }
 }
+
